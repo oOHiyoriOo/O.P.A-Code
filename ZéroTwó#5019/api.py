@@ -2,6 +2,7 @@
 from uuid import uuid4
 import json
 import sys 
+import os
 
 # install modules if missing!
 install = []
@@ -53,7 +54,6 @@ warn("Loading Args.")
 import lib.args as ParseArgs
 
 
-
 # FLAK
 app = Flask(__name__)
 api = Api(app)
@@ -62,6 +62,10 @@ CORS(app)
 udb = TinyDB('./data/user.db')
 # query
 query = Query()
+
+class connect(Resource):
+    def post(self):
+        pass
 
 class login(Resource):
     def post(self):
