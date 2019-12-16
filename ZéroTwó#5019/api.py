@@ -45,7 +45,7 @@ PORT = cfg['cn']['port']
 rootUser = cfg['root']['name']
 rootPw = cfg['root']['pw']
 
-rootDir = cfg['dir']['rootDir']
+DbrootDir = cfg['dir']['DbRootDir']
 
 info("Loaded config secussfully")
 
@@ -59,23 +59,22 @@ app = Flask(__name__)
 api = Api(app)
 CORS(app)
 
-udb = TinyDB('./data/user.db')
+udb = TinyDB(DbrootDir+"/auth.bin")
+
 # query
 query = Query()
 
 class connect(Resource):
     def post(self):
-        pass
+        info(request.form)
+        return {"error":False}
 
-class login(Resource):
-    def post(self):
-        return {'error':True,'msg':'No such User'}
 
 if __name__ == '__main__':
     import logging
     logging.basicConfig(filename='DB_Server.log',level=logging.ERROR)
     info("Running app on: http://"+HOST+":"+str(PORT))
 
-    api.add_resource(login,'/api/login/') # login form :heh:
+    api.add_resource(connect,'/api/login/') # login form :heh:
 
     app.run(host=HOST,port=PORT,debug=False)

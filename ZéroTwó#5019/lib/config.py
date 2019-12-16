@@ -10,7 +10,7 @@ cfg = {
     },
 
     "dir":{
-        "rootDir":"./db"  # pls provide full path ("./" is current directiony)
+        "DbRootDir":"./db"  # pls provide full path ("./" is current directiony)
     }    
 
 }
