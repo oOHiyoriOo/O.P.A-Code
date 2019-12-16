@@ -78,10 +78,23 @@ query = Query()
 
 class base(Resource):
     def post(self):
-        return {'ACCEPTED':True}
+
+        usr = (request.form["user"])
+        print("<<< " + str(usr))
+        data = print(request.form["data"])
+        print(data)
+
+        if str(usr) != "PI":
+            print(">>> 403")
+            return {"RESPONSE":403}
+        if str(usr) == "PI":
+            print(">>> 200")
+            return {"RESPONSE":200}
+            
+        
 
     def get(self):
-        return {"ACCEPT":True}
+        return 200
 
 if __name__ == '__main__':
     import logging
