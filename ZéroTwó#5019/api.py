@@ -51,10 +51,8 @@ info("Loaded config secussfully")
 
 warn("Loading Args.")
 
-import lib.args as ParseArgs
 
-
-# FLAK
+# FLASK
 app = Flask(__name__)
 api = Api(app)
 CORS(app)

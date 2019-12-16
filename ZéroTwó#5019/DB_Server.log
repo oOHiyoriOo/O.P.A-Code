@@ -1,0 +1,96 @@
+INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2019 14:24:13] "GET / HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2019 14:24:14] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Dec/2019 14:24:23] "GET /api/login HTTP/1.1" 500 -
+ERROR:werkzeug:Error on request:
+Traceback (most recent call last):
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\Lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\Lib\site-packages\flask\app.py", line 1925, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\Lib\site-packages\flask\app.py", line 1907, in raise_routing_exception
+    raise request.routing_exception
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\Lib\site-packages\flask\ctx.py", line 350, in match_request
+    result = self.url_adapter.match(return_rule=True)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\Lib\site-packages\werkzeug\routing.py", line 1798, in match
+    raise MethodNotAllowed(valid_methods=list(have_match_for))
+werkzeug.exceptions.MethodNotAllowed: 405 Method Not Allowed: The method is not allowed for the requested URL.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\Lib\site-packages\flask_restful\__init__.py", line 227, in _should_use_fr_error_handler
+    adapter.match()
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\Lib\site-packages\werkzeug\routing.py", line 1798, in match
+    raise MethodNotAllowed(valid_methods=list(have_match_for))
+werkzeug.exceptions.MethodNotAllowed: 405 Method Not Allowed: The method is not allowed for the requested URL.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\Lib\site-packages\werkzeug\routing.py", line 1742, in match
+    rv = rule.match(path, method)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\Lib\site-packages\werkzeug\routing.py", line 834, in match
+    raise RequestSlash()
+werkzeug.routing.RequestSlash
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\Lib\site-packages\flask\app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\Lib\site-packages\flask\app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\Lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\Lib\site-packages\flask_restful\__init__.py", line 264, in error_router
+    if self._has_fr_route():
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\Lib\site-packages\flask_restful\__init__.py", line 242, in _has_fr_route
+    if self._should_use_fr_error_handler():
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\Lib\site-packages\flask_restful\__init__.py", line 231, in _should_use_fr_error_handler
+    rule, _ = adapter.match(method=valid_route_method, return_rule=True)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\Lib\site-packages\werkzeug\routing.py", line 1744, in match
+    raise RequestRedirect(
+werkzeug.routing.RequestRedirect: 308 Permanent Redirect: None
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\Lib\site-packages\flask_restful\__init__.py", line 227, in _should_use_fr_error_handler
+    adapter.match()
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\Lib\site-packages\werkzeug\routing.py", line 1798, in match
+    raise MethodNotAllowed(valid_methods=list(have_match_for))
+werkzeug.exceptions.MethodNotAllowed: 405 Method Not Allowed: The method is not allowed for the requested URL.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\Lib\site-packages\werkzeug\routing.py", line 1742, in match
+    rv = rule.match(path, method)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\Lib\site-packages\werkzeug\routing.py", line 834, in match
+    raise RequestSlash()
+werkzeug.routing.RequestSlash
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\Lib\site-packages\werkzeug\serving.py", line 304, in run_wsgi
+    execute(self.server.app)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\Lib\site-packages\werkzeug\serving.py", line 292, in execute
+    application_iter = app(environ, start_response)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\Lib\site-packages\flask\app.py", line 2463, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\Lib\site-packages\flask\app.py", line 2449, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\Lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\Lib\site-packages\flask_restful\__init__.py", line 264, in error_router
+    if self._has_fr_route():
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\Lib\site-packages\flask_restful\__init__.py", line 242, in _has_fr_route
+    if self._should_use_fr_error_handler():
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\Lib\site-packages\flask_restful\__init__.py", line 231, in _should_use_fr_error_handler
+    rule, _ = adapter.match(method=valid_route_method, return_rule=True)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\Lib\site-packages\werkzeug\routing.py", line 1744, in match
+    raise RequestRedirect(
+werkzeug.routing.RequestRedirect: 308 Permanent Redirect: None
+INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
