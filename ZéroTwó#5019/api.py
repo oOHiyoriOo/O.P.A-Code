@@ -59,7 +59,17 @@ app = Flask(__name__)
 api = Api(app)
 CORS(app)
 
-udb = TinyDB(DbrootDir+"/auth.bin")
+
+# Try to loud it 2 times!
+try:udb = TinyDB(DbrootDir+"/auth.bin")
+except FileNotFoundError: 
+    error("No Db Directiony... trying to fix your mess!")
+    try:os.system("mkdir "+DbrootDir)
+    except Exception as err: critical("Cant create Directiony!")
+
+try:udb = TinyDB(DbrootDir+"/auth.bin")
+except Exception as err: critical("Cant Load Db!: "+err)
+
 
 # query
 query = Query()
