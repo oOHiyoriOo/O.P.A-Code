@@ -1,8 +1,7 @@
 
 from uuid import uuid4
 import json
-import sys
-import os
+import sys 
 
 # install modules if missing!
 install = []
@@ -27,10 +26,6 @@ except: install.append("ZeroLogger")
 try: from flask_cors import CORS
 except: install.append("flask_cors")
 
-import logging
-
-
-
 if install:
     to_install = " ".join(install)
     os.system(sys.executable + " -m pip install " + to_install)
@@ -39,19 +34,14 @@ if install:
 
 init()
 
-log = logging.getLogger('werkzeug')
-log.setLevel(logging.ERROR)
-
-# defaults:
-PORT = 8080
+# Standart Values:
+PORT = 3406
 HOST = "127.0.0.1"
-
-
-## parsing
+## ARG Parsing
 ARGS = sys.argv[1:]
 i = 0
 for arg in ARGS:
-    if arg == "-H" or arg == "--Host":
+    if arg == "-H":
         try:
             HOST = str(ARGS[i + 1])
         except ValueError:
@@ -60,34 +50,28 @@ for arg in ARGS:
             critical(str(err))
     i = i + 1
 
-#TODO: -p, -h -v 
 
-
-# flask base
+# FLAK
 app = Flask(__name__)
 api = Api(app)
 CORS(app)
 
-# udb = TinyDB('./data/user.db')
-# keydb = TinyDB('./data/keys.data')
-# cdb = TinyDB('./data/msg.json')
+udb = TinyDB('./data/user.db')
+keydb = TinyDB('./data/keys.data')
+cdb = TinyDB('./data/msg.json')
 
 # query
 query = Query()
 
-class base(Resource):
+class login(Resource):
     def post(self):
-        return {'ACCEPTED':True}
-
-    def get(self):
-        return {"ACCEPT":True}
+        return {'error':True,'msg':'No such User'}
 
 if __name__ == '__main__':
     import logging
     logging.basicConfig(filename='error.log',level=logging.ERROR)
-    info("Now running on port "+str(PORT))
+    info("Running app on: http://"+HOST+":"+str(PORT))
 
-    api.add_resource(base,'/') 
-
+    api.add_resource(login,'/api/login/') # login form :heh:
 
     app.run(host=HOST,port=PORT,debug=False)
