@@ -2,6 +2,7 @@
 from uuid import uuid4
 import json
 import sys 
+import os
 
 # install modules if missing!
 install = []
@@ -34,21 +35,23 @@ if install:
 
 init()
 
-# Standart Values:
-PORT = 3406
-HOST = "127.0.0.1"
-## ARG Parsing
-ARGS = sys.argv[1:]
-i = 0
-for arg in ARGS:
-    if arg == "-H":
-        try:
-            HOST = str(ARGS[i + 1])
-        except ValueError:
-            critical("Invalid HOST!")
-        except Exception as err:
-            critical(str(err))
-    i = i + 1
+## Config Parsing an loading
+try: from lib.config import cfg
+except FileNotFoundError: critical("Pls Provide a config file, like the one in github.")
+
+HOST = cfg['cn']['host']
+PORT = cfg['cn']['port']
+
+rootUser = cfg['root']['name']
+rootPw = cfg['root']['pw']
+
+DbrootDir = cfg['dir']['DbRootDir']
+
+info("Loaded config secussfully")
+
+warn("Loading Args.")
+
+import lib.args as ParseArgs
 
 
 # FLAK
@@ -56,22 +59,22 @@ app = Flask(__name__)
 api = Api(app)
 CORS(app)
 
-udb = TinyDB('./data/user.db')
-keydb = TinyDB('./data/keys.data')
-cdb = TinyDB('./data/msg.json')
+udb = TinyDB(DbrootDir+"/auth.bin")
 
 # query
 query = Query()
 
-class login(Resource):
+class connect(Resource):
     def post(self):
-        return {'error':True,'msg':'No such User'}
+        info(request.form)
+        return {"error":False}
+
 
 if __name__ == '__main__':
     import logging
-    logging.basicConfig(filename='error.log',level=logging.ERROR)
+    logging.basicConfig(filename='DB_Server.log',level=logging.ERROR)
     info("Running app on: http://"+HOST+":"+str(PORT))
 
-    api.add_resource(login,'/api/login/') # login form :heh:
+    api.add_resource(connect,'/api/login/') # login form :heh:
 
     app.run(host=HOST,port=PORT,debug=False)
