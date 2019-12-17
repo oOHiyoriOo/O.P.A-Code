@@ -74,8 +74,9 @@ query = Query()
 
 class connect(Resource):
     def post(self):
-        info(request.form)
-        return {"error":False}
+        if request.form['user'] == rootUser and request.form['pass'] == rootPw:
+            info("Login for "+request.form['user'])
+        return {'status':200} 
 
 
 if __name__ == '__main__':

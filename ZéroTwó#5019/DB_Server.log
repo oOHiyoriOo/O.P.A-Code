@@ -94,3 +94,9 @@ Traceback (most recent call last):
     raise RequestRedirect(
 werkzeug.routing.RequestRedirect: 308 Permanent Redirect: None
 INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
+INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [17/Dec/2019 08:02:49] "POST /api/login HTTP/1.1" 308 -
+INFO:werkzeug:127.0.0.1 - - [17/Dec/2019 08:02:49] "POST /api/login/ HTTP/1.1" 200 -
+INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [17/Dec/2019 08:04:29] "POST /api/login HTTP/1.1" 308 -
+INFO:werkzeug:127.0.0.1 - - [17/Dec/2019 08:04:29] "POST /api/login/ HTTP/1.1" 400 -
