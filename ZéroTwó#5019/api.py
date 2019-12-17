@@ -47,14 +47,32 @@ except ModuleNotFoundError:
 HOST = cfg['cn']['host']
 PORT = cfg['cn']['port']
 
+# user with edit rights
 rootUser = cfg['root']['name']
 rootPw = cfg['root']['pw']
+# watch only user
+watchUser = cfg['root']['wUser']
 
 DbrootDir = cfg['dir']['DbRootDir']
 
 info("Loaded config secussfully")
 
-warn("Loading Args.")
+## Refresh the database on restart to prevent data trash
+warn("Refreshing db.")
+
+if not os.path.isdir(DbrootDir):
+    warn("Creating Database Directory. . .")
+
+    os.system("mkdir "+DbrootDir.replace("./","") )
+try:
+    udb = TinyDB(DbrootDir+"/auth.bin")
+except Exception as err:
+    critical("Cannot load Database!: "+err)
+
+udb.insert({'root':{'user':'root','pass':'0000','cookie':'Created by Omni and ZéroTwó'},"wUser":{'user':'Node','cookie':'Created by Omni and ZéroTwó'}})
+
+
+
 
 
 # FLASK
@@ -64,15 +82,6 @@ CORS(app)
 
 
 
-#TODO fix this nonsense
-if not os.path.isdir("db"):
-    warn("Creating Database Directory. . .")
-    os.system("mkdir db")
-
-try:udb = TinyDB(DbrootDir+"/auth.bin")
-except Exception as err: critical("Cannot load Database!: "+err)
-
-
 
 # query
 query = Query()
@@ -80,7 +89,14 @@ query = Query()
 class connect(Resource):
     def post(self):
         if request.form['user'] == rootUser and request.form['pass'] == rootPw:
-            info("Login for "+request.form['user'])
+            cookie = uuid4()
+
+            return {'error':False,'cookie':cookie}
+        
+        elif request.form['user'] == watchUser:
+            info("Read Only acces granted!")
+        
+        
         return {'status':200} 
 
 

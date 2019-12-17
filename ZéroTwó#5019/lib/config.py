@@ -6,7 +6,8 @@ cfg = {
     
     "root":{
         "name":"root",
-        "pw":"0000"
+        "pw":"0000",
+        "wUser":"Node" # watch only user.
     },
 
     "dir":{
