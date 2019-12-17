@@ -49,9 +49,6 @@ def mkconf():
         critical("Configuration file created. Please restart script.")
 
 
-
-
-
 ## Config Parsing an loading
 try: from lib.config import cfg
 except ModuleNotFoundError: mkconf()
@@ -63,8 +60,62 @@ if not os.path.isdir("db"):
 
     
 
-try:udb = TinyDB("db/auth.bin")
-except Exception as err: critical("Cannot load Database!: "+err)
+try:histdb = TinyDB("db/history.db")
+except Exception as err: critical("Cannot load Database!: "+str(err))
+
+
+if not os.path.isfile("db/curstats.db"):
+    try:
+        curdb = TinyDB("db/curstats.db")
+    except Exception as err: critical("Cannot load Database!: "+str(err))
+else:
+    try:     
+        curdb.purge()
+    except Exception:
+        os.remove("db/curstats.db")
+
+
+
+
+# if str(edb.search(query.filled == True)) == "[]":   
+#     edb.insert({"filled":True}) 
+#     edb.insert({"id":0,"name":"Monster1","ad":50,"df":20,"hp":500})
+#     edb.insert({"id":1,"name":"Monster2","ad":40,"df":25,"hp":600})
+#     edb.insert({"id":2,"name":"Monster3","ad":60,"df":15,"hp":400})
+
+# uid = message.author.id
+#             if str(udb.search(query.id == uid)) == "[]":
+#                 data = {}
+#                 data["id"] = uid
+
+#                 if int(uid) == int(su):
+#                     data["godmode"] = False
+#                 else:
+#                     data["godmode"] = "Disallowed"
+
+#                 data["score"] = 0
+#                 data["amt"] = 15
+#                 data["money"] = 15
+#                 data["emptycans"] = 30
+#                 data["fullcans"] = 0
+#                 data["maxcans"] = 100
+#                 data["hamt"] = 1
+#                 data["bpm"] = 0
+#                 data["lvl"] = 1
+#                 data["xp"] = 0
+#                 data["tonext"] = 100
+#                 data["claimable"] = 0
+#                 data["maxclaim"] = 60
+#                 data["curclaim"] = 0
+#                 data["message"] = False
+#                 data["messagerecieved"] = False
+
+#                 udb.insert(data)
+
+#                 data = {}
+#                 data["id"] = uid
+
+
 
 
 
@@ -77,9 +128,8 @@ rootPw = cfg['root']['pw']
 
 DbrootDir = cfg['dir']['DbRootDir']
 
-info("Loaded config sucessfully.")
+warn("Loaded config sucessfully.")
 
-info("Loading Args.")
 
 # flask base
 app = Flask(__name__)
