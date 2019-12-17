@@ -1,8 +1,8 @@
-
 from uuid import uuid4
 import json
 import sys
 import os
+
 
 # install modules if missing!
 install = []
@@ -29,9 +29,6 @@ except: install.append("flask_cors")
 
 import logging
 
-
-
-
 if install:
     to_install = " ".join(install)
     os.system(sys.executable + " -m pip install " + to_install)
@@ -40,38 +37,57 @@ if install:
 
 init()
 
-log = logging.getLogger('werkzeug')
-log.setLevel(logging.ERROR)
+def mkconf():
+    if not os.path.isdir("lib"):
+        warn("Creating Libraries Directory. . .")
+        os.system("mkdir lib")
 
-# defaults:
-PORT = 8080
-HOST = "127.0.0.1"
+    if not os.path.isfile("/lib/config.py"):
+        warn("No configuration file provided or configuration file unable to be read. \nCreating default file. . .")
+        with open("lib/config.py","w") as cnf:
+            cnf.write("""cfg = {"cn": {"host":"0.0.0.0","port":8080,},"root":{"name":"root","pw":"0000","wUser":"Node"},"dir":{"DbRootDir":"./db"}}""")
+        critical("Configuration file created. Please restart script.")
 
 
-## parsing
-ARGS = sys.argv[1:]
-i = 0
-for arg in ARGS:
-    if arg == "-H" or arg == "--Host":
-        try:
-            HOST = str(ARGS[i + 1])
-        except ValueError:
-            critical("Invalid HOST!")
-        except Exception as err:
-            critical(str(err))
-    i = i + 1
 
-#TODO: -p, -h -v 
 
+
+## Config Parsing an loading
+try: from lib.config import cfg
+except ModuleNotFoundError: mkconf()
+
+#TODO fix this nonsense
+if not os.path.isdir("db"):
+    warn("Creating Database Directory. . .")
+    os.system("mkdir db")
+
+    
+
+try:udb = TinyDB("db/auth.bin")
+except Exception as err: critical("Cannot load Database!: "+err)
+
+
+
+
+HOST = cfg['cn']['host']
+PORT = cfg['cn']['port']
+
+rootUser = cfg['root']['name']
+rootPw = cfg['root']['pw']
+
+DbrootDir = cfg['dir']['DbRootDir']
+
+info("Loaded config sucessfully.")
+
+info("Loading Args.")
 
 # flask base
 app = Flask(__name__)
 api = Api(app)
 CORS(app)
 
-# udb = TinyDB('./data/user.db')
-# keydb = TinyDB('./data/keys.data')
-# cdb = TinyDB('./data/msg.json')
+
+
 
 # query
 query = Query()
