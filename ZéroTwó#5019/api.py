@@ -58,15 +58,15 @@ api = Api(app)
 CORS(app)
 
 
-# Try to load it 2 times!
-try:udb = TinyDB(DbrootDir+"/auth.bin")
-except FileNotFoundError: 
-    error("No Db Directiony... trying to fix your mess!")
-    try:os.system("mkdir "+DbrootDir)
-    except Exception as err: critical("Cant create Directiony!")
+
+#TODO fix this nonsense
+if not os.path.isdir("db"):
+    warn("Creating Database Directory. . .")
+    os.system("mkdir db")
 
 try:udb = TinyDB(DbrootDir+"/auth.bin")
-except Exception as err: critical("Cant Load Db!: "+err)
+except Exception as err: critical("Cannot load Database!: "+err)
+
 
 
 # query

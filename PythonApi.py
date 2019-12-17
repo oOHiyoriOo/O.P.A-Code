@@ -57,26 +57,6 @@ info("Loaded config sucessfully.")
 
 info("Loading Args.")
 
-# defaults:
-PORT = 8080
-HOST = "127.0.0.1"
-
-
-## parsing
-ARGS = sys.argv[1:]
-i = 0
-for arg in ARGS:
-    if arg == "-H" or arg == "--Host":
-        try:
-            HOST = str(ARGS[i + 1])
-        except ValueError:
-            critical("Invalid HOST!")
-        except Exception as err:
-            critical(str(err))
-    i = i + 1
-
-#TODO advanced args passing
-
 
 # flask base
 app = Flask(__name__)
@@ -87,8 +67,6 @@ CORS(app)
 if not os.path.isdir("db"):
     warn("Creating Database Directory. . .")
     os.system("mkdir db")
-
-    
 
 try:udb = TinyDB(DbrootDir+"/auth.bin")
 except Exception as err: critical("Cannot load Database!: "+err)
