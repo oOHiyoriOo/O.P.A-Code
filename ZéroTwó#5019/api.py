@@ -35,9 +35,14 @@ if install:
 
 init()
 
+def mkconf():
+    info("Called Func")
+
 ## Config Parsing an loading
 try: from lib.config import cfg
-except FileNotFoundError: critical("Pls Provide a config file, like the one in github.")
+except ModuleNotFoundError: 
+    mkconf()
+    critical("Pls Provide a config file, like the one in github.")
 
 HOST = cfg['cn']['host']
 PORT = cfg['cn']['port']
