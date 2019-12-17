@@ -1,5 +1,4 @@
-
-from uuid import uuid4
+import uuid
 import json
 import sys 
 import os
@@ -50,30 +49,25 @@ PORT = cfg['cn']['port']
 # user with edit rights
 rootUser = cfg['root']['name']
 rootPw = cfg['root']['pw']
+rootCookie = str(uuid.uuid4())
 # watch only user
-watchUser = cfg['root']['wUser']
+wUser = cfg['wUser']['wUser']
+wUserToken = cfg['wUser']['wUserToken']
 
 DbrootDir = cfg['dir']['DbRootDir']
 
 info("Loaded config secussfully")
 
-## Refresh the database on restart to prevent data trash
-warn("Refreshing db.")
 
-if not os.path.isdir(DbrootDir):
-    warn("Creating Database Directory. . .")
+# snipped for handling db's
+# if not os.path.isdir(DbrootDir):
+#     warn("Creating Database Directory. . .")
 
-    os.system("mkdir "+DbrootDir.replace("./","") )
-try:
-    udb = TinyDB(DbrootDir+"/auth.bin")
-except Exception as err:
-    critical("Cannot load Database!: "+err)
-
-udb.insert({'root':{'user':'root','pass':'0000','cookie':'Created by Omni and ZéroTwó'},"wUser":{'user':'Node','cookie':'Created by Omni and ZéroTwó'}})
-
-
-
-
+#     os.system("mkdir "+DbrootDir.replace("./","") )
+# try:
+#     udb = TinyDB(DbrootDir+"/auth.bin")
+# except Exception as err:
+#     critical("Cannot load Database!: "+err)
 
 # FLASK
 app = Flask(__name__)
@@ -86,18 +80,25 @@ CORS(app)
 # query
 query = Query()
 
+class ping():
+    def get(self):
+        return {'error':False}
+    def post(self):
+        return {'error':False}
+
 class connect(Resource):
+    global rootCookie
+
     def post(self):
         if request.form['user'] == rootUser and request.form['pass'] == rootPw:
-            cookie = uuid4()
+            rootCookie = uuid.uuid4()
+            return {'error':False,'cookie':rootCookie}
+        
+        elif request.form['user'] == wUser and request.form['token'] in wUserToken:
+            return {'error':False}
 
-            return {'error':False,'cookie':cookie}
-        
-        elif request.form['user'] == watchUser:
-            info("Read Only acces granted!")
-        
-        
-        return {'status':200} 
+        else:
+            return {'error':True} 
 
 
 if __name__ == '__main__':
@@ -105,6 +106,7 @@ if __name__ == '__main__':
     logging.basicConfig(filename='DB_Server.log',level=logging.ERROR)
     info("Running app on: http://"+HOST+":"+str(PORT))
 
-    api.add_resource(connect,'/api/login/') # login form :heh:
+    api.add_resource(ping,"/ping") # are u there ?
+    api.add_resource(connect,'/api/login/') # login form
 
     app.run(host=HOST,port=PORT,debug=False)
