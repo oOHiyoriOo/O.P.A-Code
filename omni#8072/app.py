@@ -9,7 +9,7 @@ install = []
 try: from tinydb import TinyDB, Query
 except: install.append("TinyDB")
 
-try: from flask import Flask, abort, request
+try: from flask import Flask, abort, request, Response
 except: install.append("flask")
 
 try: from flask_restful import Resource, Api
@@ -94,7 +94,13 @@ class base(Resource):
         
 
     def get(self):
-        return 200
+        ret = '{"RESPONSE": "200"}'
+
+        resp = Response(response=ret,
+                    status=404,
+                    mimetype="application/json")
+
+        return resp
 
 if __name__ == '__main__':
     import logging

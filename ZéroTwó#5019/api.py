@@ -58,7 +58,7 @@ api = Api(app)
 CORS(app)
 
 
-# Try to loud it 2 times!
+# Try to load it 2 times!
 try:udb = TinyDB(DbrootDir+"/auth.bin")
 except FileNotFoundError: 
     error("No Db Directiony... trying to fix your mess!")
