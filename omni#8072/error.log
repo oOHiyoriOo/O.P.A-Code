@@ -1,62 +1,8 @@
-ERROR:app:Exception on / [POST]
-Traceback (most recent call last):
-  File "C:\Users\bernd.max\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "C:\Users\bernd.max\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1935, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "C:\Users\bernd.max\AppData\Local\Programs\Python\Python38\lib\site-packages\flask_restful\__init__.py", line 458, in wrapper
-    resp = resource(*args, **kwargs)
-  File "C:\Users\bernd.max\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\views.py", line 89, in view
-    return self.dispatch_request(*args, **kwargs)
-  File "C:\Users\bernd.max\AppData\Local\Programs\Python\Python38\lib\site-packages\flask_restful\__init__.py", line 573, in dispatch_request
-    resp = meth(*args, **kwargs)
-  File "app.py", line 82, in post
-    print(request.form.json)
-AttributeError: 'ImmutableMultiDict' object has no attribute 'json'
-ERROR:app:Exception on / [POST]
-Traceback (most recent call last):
-  File "C:\Users\bernd.max\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "C:\Users\bernd.max\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1935, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "C:\Users\bernd.max\AppData\Local\Programs\Python\Python38\lib\site-packages\flask_restful\__init__.py", line 458, in wrapper
-    resp = resource(*args, **kwargs)
-  File "C:\Users\bernd.max\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\views.py", line 89, in view
-    return self.dispatch_request(*args, **kwargs)
-  File "C:\Users\bernd.max\AppData\Local\Programs\Python\Python38\lib\site-packages\flask_restful\__init__.py", line 573, in dispatch_request
-    resp = meth(*args, **kwargs)
-  File "app.py", line 85, in post
-    print("     " +data)
-TypeError: can only concatenate str (not "NoneType") to str
 INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [18/Dec/2019 10:55:19] "POST / HTTP/1.1" 200 -
 INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [18/Dec/2019 10:56:50] "POST / HTTP/1.1" 403 -
+INFO:werkzeug:127.0.0.1 - - [18/Dec/2019 10:56:54] "POST / HTTP/1.1" 403 -
+INFO:werkzeug:127.0.0.1 - - [18/Dec/2019 10:56:58] "POST / HTTP/1.1" 200 -
 INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
-INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
-INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
-INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
-INFO:werkzeug:127.0.0.1 - - [17/Dec/2019 08:56:38] "GET / HTTP/1.1" 404 -
-INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
-INFO:werkzeug:127.0.0.1 - - [17/Dec/2019 08:58:56] "POST / HTTP/1.1" 200 -
-INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
-INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
-INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
-INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
-INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
-INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
-INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
-INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
-INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
-INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
-INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
-INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
-INFO:werkzeug:127.0.0.1 - - [18/Dec/2019 10:27:45] "GET / HTTP/1.1" 404 -
-INFO:werkzeug:127.0.0.1 - - [18/Dec/2019 10:27:45] "GET /favicon.ico HTTP/1.1" 404 -
-INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
-INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
-INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
-INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
-INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
-INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
-INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
-INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
-INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [18/Dec/2019 10:58:09] "POST / HTTP/1.1" 200 -

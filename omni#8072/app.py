@@ -2,6 +2,8 @@ from uuid import uuid4
 import json
 import sys
 import os
+import uuid
+from datetime import datetime
 
 
 # install modules if missing!
@@ -53,65 +55,30 @@ def mkconf():
 try: from lib.config import cfg
 except ModuleNotFoundError: mkconf()
 
-#TODO fix this nonsense
+
 if not os.path.isdir("db"):
     warn("Creating Database Directory. . .")
     os.system("mkdir db")
 
     
-#TODO fix this shit
-try:histdb = TinyDB("db/history.db")
+try:histdb = TinyDB("db/history.json")
+except Exception as err: critical("Cannot load Database!: "+str(err))
+
+    
+try:reqdb = TinyDB("db/requests.json")
 except Exception as err: critical("Cannot load Database!: "+str(err))
 
 
-if not os.path.isfile("db/curstats.db"):
+if not os.path.isfile("db/curstats.json"):
     try:
-        curdb = TinyDB("db/curstats.db")
+        curdb = TinyDB("db/curstats.json")
     except Exception as err: critical("Cannot create database file!: "+str(err))
 else:
     try:     
         curdb.purge()
     except Exception:
-        os.remove("db/curstats.db")
-        curdb = TinyDB("db/curstats.db")
-
-
-# uid = message.author.id
-#             if str(udb.search(query.id == uid)) == "[]":
-#                 data = {}
-#                 data["id"] = uid
-
-#                 if int(uid) == int(su):
-#                     data["godmode"] = False
-#                 else:
-#                     data["godmode"] = "Disallowed"
-
-#                 data["score"] = 0
-#                 data["amt"] = 15
-#                 data["money"] = 15
-#                 data["emptycans"] = 30
-#                 data["fullcans"] = 0
-#                 data["maxcans"] = 100
-#                 data["hamt"] = 1
-#                 data["bpm"] = 0
-#                 data["lvl"] = 1
-#                 data["xp"] = 0
-#                 data["tonext"] = 100
-#                 data["claimable"] = 0
-#                 data["maxclaim"] = 60
-#                 data["curclaim"] = 0
-#                 data["message"] = False
-#                 data["messagerecieved"] = False
-
-#                 udb.insert(data)
-
-#                 data = {}
-#                 data["id"] = uid
-
-
-
-
-
+        os.remove("db/curstats.json")
+        curdb = TinyDB("db/curstats.json")
 
 HOST = cfg['cn']['host']
 PORT = cfg['cn']['port']
@@ -122,7 +89,6 @@ rootPw = cfg['root']['pw']
 DbrootDir = cfg['dir']['DbRootDir']
 
 warn("Loaded config sucessfully.")
-
 
 # flask base
 app = Flask(__name__)
@@ -149,10 +115,26 @@ class base(Resource):
                         mimetype="application/json") 
             return resp
 
-
-
         if str(usr) == "PI":
             print(">>> 200")
+            
+            now = datetime.now()
+            timestamp = now.strftime("%Y-%m-%d-%H-%M-%S")
+            reqID = uuid.uuid4()
+
+            Data = {}
+
+            if str(data) == "":
+                data = "NODATA"
+
+            Data["fromUser"] = str(usr)
+            Data["isAdmin"] = False
+            Data["data"] = str(data)
+            Data["requestID"] = str(reqID)
+            Data["timestamp"] = str(timestamp)
+
+            reqdb.insert(Data)
+
             ret = '{"RESPONSE": 200}'
 
             resp = Response(response=ret,
@@ -176,6 +158,5 @@ if __name__ == '__main__':
     info("Now running on port "+str(PORT))
 
     api.add_resource(base,'/') 
-
 
     app.run(host=HOST,port=PORT,debug=False)
