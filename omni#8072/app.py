@@ -59,20 +59,20 @@ if not os.path.isdir("db"):
     os.system("mkdir db")
 
     
+#TODO FIX
+# try:histdb = TinyDB("db/history.db")
+# except Exception as err: critical("Cannot load Database!: "+str(err))
 
-try:histdb = TinyDB("db/history.db")
-except Exception as err: critical("Cannot load Database!: "+str(err))
 
-
-if not os.path.isfile("db/curstats.db"):
-    try:
-        curdb = TinyDB("db/curstats.db")
-    except Exception as err: critical("Cannot load Database!: "+str(err))
-else:
-    try:     
-        curdb.purge()
-    except Exception:
-        os.remove("db/curstats.db")
+# if not os.path.isfile("db/curstats.db"):
+#     try:
+#         curdb = TinyDB("db/curstats.db")
+#     except Exception as err: critical("Cannot load Database!: "+str(err))
+# else:
+#     try:     
+#         curdb.purge()
+#     except Exception:
+#         os.remove("db/curstats.db")
 
 
 
