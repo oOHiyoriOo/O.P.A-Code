@@ -59,29 +59,22 @@ if not os.path.isdir("db"):
     os.system("mkdir db")
 
     
-#TODO FIX
-# try:histdb = TinyDB("db/history.db")
-# except Exception as err: critical("Cannot load Database!: "+str(err))
+#TODO fix this shit
+try:histdb = TinyDB("db/history.db")
+except Exception as err: critical("Cannot load Database!: "+str(err))
 
 
-# if not os.path.isfile("db/curstats.db"):
-#     try:
-#         curdb = TinyDB("db/curstats.db")
-#     except Exception as err: critical("Cannot load Database!: "+str(err))
-# else:
-#     try:     
-#         curdb.purge()
-#     except Exception:
-#         os.remove("db/curstats.db")
+if not os.path.isfile("db/curstats.db"):
+    try:
+        curdb = TinyDB("db/curstats.db")
+    except Exception as err: critical("Cannot create database file!: "+str(err))
+else:
+    try:     
+        curdb.purge()
+    except Exception:
+        os.remove("db/curstats.db")
+        curdb = TinyDB("db/curstats.db")
 
-
-
-
-# if str(edb.search(query.filled == True)) == "[]":   
-#     edb.insert({"filled":True}) 
-#     edb.insert({"id":0,"name":"Monster1","ad":50,"df":20,"hp":500})
-#     edb.insert({"id":1,"name":"Monster2","ad":40,"df":25,"hp":600})
-#     edb.insert({"id":2,"name":"Monster3","ad":60,"df":15,"hp":400})
 
 # uid = message.author.id
 #             if str(udb.search(query.id == uid)) == "[]":
@@ -136,9 +129,6 @@ app = Flask(__name__)
 api = Api(app)
 CORS(app)
 
-
-
-
 # query
 query = Query()
 
@@ -147,23 +137,34 @@ class base(Resource):
 
         usr = (request.form["user"])
         print("<<< " + str(usr))
-        data = print(request.form["data"])
+        data = (request.form["data"])
         print(data)
 
         if str(usr) != "PI":
             print(">>> 403")
-            return {"RESPONSE":403}
+            ret = '{"RESPONSE": 403}'
+
+            resp = Response(response=ret,
+                        status=403,
+                        mimetype="application/json") 
+            return resp
+
+
+
         if str(usr) == "PI":
             print(">>> 200")
-            return {"RESPONSE":200}
-            
-        
+            ret = '{"RESPONSE": 200}'
+
+            resp = Response(response=ret,
+                        status=200,
+                        mimetype="application/json") 
+            return resp
 
     def get(self):
-        ret = '{"RESPONSE": "200"}'
+        ret = '{"RESPONSE": 403}'
 
         resp = Response(response=ret,
-                    status=404,
+                    status=403,
                     mimetype="application/json")
 
         return resp
@@ -171,6 +172,7 @@ class base(Resource):
 if __name__ == '__main__':
     import logging
     logging.basicConfig(filename='error.log',level=logging.ERROR)
+    os.system("cls")
     info("Now running on port "+str(PORT))
 
     api.add_resource(base,'/') 
