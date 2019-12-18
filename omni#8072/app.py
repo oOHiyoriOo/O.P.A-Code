@@ -105,7 +105,7 @@ class base(Resource):
         print("<<< " + str(usr))
         data = (request.form["data"])
         print(data)
-
+        #Post Denied
         if str(usr) != "PI":
             print(">>> 403")
             ret = '{"RESPONSE": 403}'
@@ -114,7 +114,7 @@ class base(Resource):
                         status=403,
                         mimetype="application/json") 
             return resp
-
+        #Post Accepted
         if str(usr) == "PI":
             print(">>> 200")
             
@@ -141,7 +141,7 @@ class base(Resource):
                         status=200,
                         mimetype="application/json") 
             return resp
-
+    #Deny GET requests
     def get(self):
         ret = '{"RESPONSE": 403}'
 
