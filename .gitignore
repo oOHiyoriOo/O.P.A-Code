@@ -1,3 +1,5 @@
 ./ZéroTwó#5019/*.log
 ./omni#8072/*.log
 ./*.log
+./logs/*.logs
+./db/*
