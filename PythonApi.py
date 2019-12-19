@@ -40,6 +40,11 @@ if install:
 
 init()
 
+## logs dir
+if not os.path.isdir('logs'):
+    warn("Creating Log Dir.")
+    os.system('mkdir logs') 
+
 def mkconf():
     if not os.path.isdir("lib"):
         warn("Creating Libraries Directory. . .")
@@ -178,7 +183,7 @@ class connect(Resource):
 
 if __name__ == '__main__':
     import logging
-    logging.basicConfig(filename='error.log',level=logging.ERROR)
+    logging.basicConfig(filename='/logs/DB_Server.log',level=logging.ERROR)
     os.system("cls")
     info("Now running on port "+str(PORT))
 
