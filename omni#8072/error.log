@@ -6,3 +6,4 @@ INFO:werkzeug:127.0.0.1 - - [18/Dec/2019 10:56:54] "POST / HTTP/1.1" 403 -
 INFO:werkzeug:127.0.0.1 - - [18/Dec/2019 10:56:58] "POST / HTTP/1.1" 200 -
 INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
 INFO:werkzeug:127.0.0.1 - - [18/Dec/2019 10:58:09] "POST / HTTP/1.1" 200 -
+INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)

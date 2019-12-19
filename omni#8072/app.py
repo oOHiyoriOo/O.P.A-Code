@@ -128,7 +128,6 @@ class base(Resource):
                 data = "NODATA"
 
             Data["fromUser"] = str(usr)
-            Data["isAdmin"] = False
             Data["data"] = str(data)
             Data["requestID"] = str(reqID)
             Data["timestamp"] = str(timestamp)
