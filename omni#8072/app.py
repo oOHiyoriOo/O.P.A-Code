@@ -150,12 +150,15 @@ class base(Resource):
 
         return resp
 
+def refresh():
+    os.system("clear")
+
 if __name__ == '__main__':
     import logging
     logging.basicConfig(filename='error.log',level=logging.ERROR)
     os.system("cls")
     info("Now running on port "+str(PORT))
 
-    api.add_resource(base,'/') 
+    api.add_resource(base,'/')
 
     app.run(host=HOST,port=PORT,debug=False)

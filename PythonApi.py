@@ -5,7 +5,7 @@ import uuid
 from datetime import datetime
 
 
-+
+
 # install modules if missing!
 install = []
 try: from tinydb import TinyDB, Query
@@ -182,7 +182,7 @@ if __name__ == '__main__':
     os.system("cls")
     info("Now running on port "+str(PORT))
 
-    api.add_resource(base,'/') 
+    api.add_resource(base,'/') # send raw request data to database
     api.add_resource(connect,'/api/login/') # login form
 
     app.run(host=HOST,port=PORT,debug=False)
