@@ -1,4 +1,3 @@
-from uuid import uuid4
 import json
 import sys
 import os
@@ -6,6 +5,7 @@ import uuid
 from datetime import datetime
 
 
++
 # install modules if missing!
 install = []
 try: from tinydb import TinyDB, Query
@@ -28,6 +28,7 @@ except: install.append("ZeroLogger")
 
 try: from flask_cors import CORS
 except: install.append("flask_cors")
+
 
 import logging
 
@@ -56,6 +57,24 @@ try: from lib.config import cfg
 except ModuleNotFoundError: mkconf()
 
 
+HOST = cfg['cn']['host']
+PORT = cfg['cn']['port']
+
+# user with edit rights
+rootUser = cfg['root']['name']
+rootPw = cfg['root']['pw']
+rootCookie = str(uuid.uuid4())
+# watch only user
+wUser = cfg['wUser']['wUser']
+wUserToken = cfg['wUser']['wUserToken']
+
+DbrootDir = cfg['dir']['DbRootDir']
+
+
+
+
+
+
 if not os.path.isdir("db"):
     warn("Creating Database Directory. . .")
     os.system("mkdir db")
@@ -80,15 +99,6 @@ else:
         os.remove("db/curstats.json")
         curdb = TinyDB("db/curstats.json")
 
-HOST = cfg['cn']['host']
-PORT = cfg['cn']['port']
-
-rootUser = cfg['root']['name']
-rootPw = cfg['root']['pw']
-
-DbrootDir = cfg['dir']['DbRootDir']
-
-warn("Loaded config sucessfully.")
 
 # flask base
 app = Flask(__name__)
@@ -150,6 +160,22 @@ class base(Resource):
 
         return resp
 
+
+class connect(Resource):
+    global rootCookie
+
+    def post(self):
+        if request.form['user'] == rootUser and request.form['pass'] == rootPw:
+            rootCookie = uuid.uuid4()
+            return {'error':False,'cookie':rootCookie}
+        
+        elif request.form['user'] == wUser and request.form['token'] in wUserToken:
+            return {'error':False}
+
+        else:
+            return {'error':True} 
+
+
 if __name__ == '__main__':
     import logging
     logging.basicConfig(filename='error.log',level=logging.ERROR)
@@ -157,5 +183,6 @@ if __name__ == '__main__':
     info("Now running on port "+str(PORT))
 
     api.add_resource(base,'/') 
+    api.add_resource(connect,'/api/login/') # login form
 
     app.run(host=HOST,port=PORT,debug=False)
