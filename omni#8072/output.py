@@ -4,6 +4,8 @@ import os
 import uuid
 from datetime import datetime
 import logging
+import random
+import time
 
 install = []
 try: from tinydb import TinyDB, Query
@@ -35,22 +37,26 @@ if install:
 
 init()
 
-
+print("Connecting Database. . .")
 
 def refresh(delay = 3):
     now = datetime.now()
-    time = now.strftime("%Y-%m-%d-%H-%M-%S")
+    time = now.strftime("%d.%m.%Y %H:%M:%S")
     try:
         voltage = curdb.search(query.id == id)[0]["voltage"]
     except IndexError:
-        voltage = 0
-
-
+        voltage = random.uniform(0,5)
+        
+    percentage = (voltage / 5) * 100   
+    voltstring = "["
 
     
 
     os.system("cls")
-    print(str(time))
+    print(Fore.RESET + str(time) + "\n\n\n")
+    print(str(percentage))
+    print(Fore.BLUE + "Output "+ str(voltstring))
+    time.sleep(delay)
     refresh(delay = 3)
 
 
