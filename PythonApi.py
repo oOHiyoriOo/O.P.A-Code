@@ -40,11 +40,6 @@ if install:
 
 init()
 
-## logs dir
-if not os.path.isdir('logs'):
-    warn("Creating Log Dir.")
-    os.system('mkdir logs') 
-
 def mkconf():
     if not os.path.isdir("lib"):
         warn("Creating Libraries Directory. . .")
@@ -53,7 +48,29 @@ def mkconf():
     if not os.path.isfile("/lib/config.py"):
         warn("No configuration file provided or configuration file unable to be read. \nCreating default file. . .")
         with open("lib/config.py","w") as cnf:
-            cnf.write("""cfg = {"cn": {"host":"0.0.0.0","port":8080,},"root":{"name":"root","pw":"0000","wUser":"Node"},"dir":{"DbRootDir":"./db"}}""")
+            cnf.write("""cfg = {
+    "cn": {
+        "host":"0.0.0.0",
+        "port":8080,
+    },
+    
+    "root":{
+        "name":"root",
+        "pw":"0000",
+        
+    },
+    "wUser":{
+        "wUser":"Node", # watch only user.
+        "wUserToken":[ # to limit read only acces we use tokens to grant access
+            "2876665379"
+        ],
+    },
+    
+    "dir":{
+        "DbRootDir":"./db"  # pls provide full path ("./" is current directiony)
+    }    
+
+}""")
         critical("Configuration file created. Please restart script.")
 
 
@@ -183,7 +200,7 @@ class connect(Resource):
 
 if __name__ == '__main__':
     import logging
-    logging.basicConfig(filename='/logs/DB_Server.log',level=logging.ERROR)
+    logging.basicConfig(filename='DB_Server.log',level=logging.ERROR)
     os.system("cls")
     info("Now running on port "+str(PORT))
 
