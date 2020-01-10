@@ -3,7 +3,7 @@ import sys
 import os
 import uuid
 from datetime import datetime
-
+from importlib import reload as BEANS
 
 
 # install modules if missing!
@@ -44,6 +44,7 @@ def mkconf():
     if not os.path.isdir("lib"):
         warn("Creating Libraries Directory. . .")
         os.system("mkdir lib")
+        curdb = TinyDB("db/curstats.json")
 
     if not os.path.isfile("/lib/config.py"):
         warn("No configuration file provided or configuration file unable to be read. \nCreating default file. . .")
@@ -57,6 +58,10 @@ def mkconf():
     "root":{
         "name":"root",
         "pw":"0000",
+
+    "users":[
+        "John Doe:Password"
+    ],
         
     },
     "wUser":{
@@ -65,18 +70,24 @@ def mkconf():
             "2876665379"
         ],
     },
-    
+    "users":[
+        "override:ov123"
+    ],
     "dir":{
         "DbRootDir":"./db"  # pls provide full path ("./" is current directiony)
     }    
 
 }""")
-        critical("Configuration file created. Please restart script.")
+        info("Reloading Config.")
+        return True
+        #critical("Configuration file created. Please restart script.")
 
 
 ## Config Parsing an loading
 try: from lib.config import cfg
-except ModuleNotFoundError: mkconf()
+except ModuleNotFoundError: 
+    if mkconf():
+        from lib.config import cfg
 
 
 HOST = cfg['cn']['host']
@@ -86,6 +97,10 @@ PORT = cfg['cn']['port']
 rootUser = cfg['root']['name']
 rootPw = cfg['root']['pw']
 rootCookie = str(uuid.uuid4())
+
+#users
+USERS = cfg["users"]
+
 # watch only user
 wUser = cfg['wUser']['wUser']
 wUserToken = cfg['wUser']['wUserToken']
@@ -109,13 +124,16 @@ except Exception as err: critical("Cannot load Database!: "+str(err))
 try:reqdb = TinyDB("db/requests.json")
 except Exception as err: critical("Cannot load Database!: "+str(err))
 
+try: authdb = TinyDB('db/auth.bin')
+except Exception as err: critical("Cannot load Auth Database: "+str(err))
 
 if not os.path.isfile("db/curstats.json"):
     try:
         curdb = TinyDB("db/curstats.json")
     except Exception as err: critical("Cannot create database file!: "+str(err))
 else:
-    try:     
+    try:    
+        curdb = TinyDB("db/curstats.json") 
         curdb.purge()
     except Exception:
         os.remove("db/curstats.json")
@@ -135,19 +153,49 @@ class base(Resource):
 
         usr = (request.form["user"])
         print("<<< " + str(usr))
+
+        passwd = (request.form["pw"])
+        print("<<< " + str(usr))
+
+
         data = (request.form["data"])
         print(data)
-        #Post Denied
-        if str(usr) != "PI":
-            print(">>> 403")
-            ret = '{"RESPONSE": 403}'
+        
 
-            resp = Response(response=ret,
-                        status=403,
-                        mimetype="application/json") 
-            return resp
+        
+
+        #Post Denied
+        if str(usr) != rootUser:
+
+            for each in USERS:
+                name = each.split(":")[0]
+                pw = each.split(":")[1]
+                print(name)
+                print(pw)
+                if str(usr) == str(name) and passwd == str(pw):
+                    accepted = True
+                    break
+
+            if accepted == True:
+                print(">>> 200")
+                ret = '{"RESPONSE": 200}'
+
+                resp = Response(response=ret,
+                            status=200,
+                            mimetype="application/json") 
+                return resp
+
+            else:    
+                print(">>> 403")
+                ret = '{"RESPONSE": 403}'
+
+                resp = Response(response=ret,
+                            status=403,
+                            mimetype="application/json") 
+                return resp
+
         #Post Accepted
-        if str(usr) == "PI":
+        if str(usr) == rootUser and request.form['pw'] == rootPw and data != "":
             print(">>> 200")
             
             now = datetime.now()
@@ -189,6 +237,7 @@ class connect(Resource):
     def post(self):
         if request.form['user'] == rootUser and request.form['pass'] == rootPw:
             rootCookie = uuid.uuid4()
+            
             return {'error':False,'cookie':rootCookie}
         
         elif request.form['user'] == wUser and request.form['token'] in wUserToken:
@@ -201,7 +250,14 @@ class connect(Resource):
 if __name__ == '__main__':
     import logging
     logging.basicConfig(filename='DB_Server.log',level=logging.ERROR)
-    os.system("cls")
+        
+    if sys.platform == "linux":
+        os.system('clear')
+    elif sys.platform == "win32":
+        os.system('cls')
+    else:
+        error("Dont know what platform this is.")
+
     info("Now running on port "+str(PORT))
 
     api.add_resource(base,'/') # send raw request data to database

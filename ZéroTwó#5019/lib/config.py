@@ -9,15 +9,20 @@ cfg = {
         "pw":"0000",
         
     },
+
+    "users":[
+        "override:ov123"
+    ],
+
     "wUser":{
         "wUser":"Node", # watch only user.
-        "wUserToken":[ # to limit read only acces we use tokens to grant access
+        "wUserToken":[ # to limit read only access we use tokens to grant access
             "2876665379"
         ],
     },
     
     "dir":{
-        "DbRootDir":"./db"  # pls provide full path ("./" is current directiony)
+        "DbRootDir":"./db"  # please provide full path ("./" is current directiony)
     }    
 
 }
