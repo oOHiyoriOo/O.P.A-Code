@@ -9,3 +9,140 @@ INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
 INFO:werkzeug:127.0.0.1 - - [14/Jan/2020 09:11:18] "GET / HTTP/1.1" 403 -
 >>>>>>> 95ec8988d6969ede87e6db9bd94104c6c854ba3a
 INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
+INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:17:27] "GET / HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:17:27] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:22:33] "GET / HTTP/1.1" 404 -
+INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:22:46] "GET /home HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:22:55] "GET /home HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:22:56] "GET /home HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:22:56] "GET /home HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:22:57] "GET /home HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:22:57] "GET /home HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:22:57] "GET /home HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:22:57] "GET /home HTTP/1.1" 404 -
+INFO:werkzeug: * Running on http://0.0.0.0:25565/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:23:26] "GET / HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:23:26] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:23:29] "GET / HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:23:30] "GET / HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:23:30] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:werkzeug: * Running on http://0.0.0.0:25565/ (Press CTRL+C to quit)
+INFO:werkzeug: * Running on http://0.0.0.0:12000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:24:01] "GET / HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:24:01] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:werkzeug: * Running on http://0.0.0.0:3600/ (Press CTRL+C to quit)
+INFO:werkzeug: * Running on http://0.0.0.0:3600/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:24:34] "GET / HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:24:34] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:24:36] "GET / HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:24:37] "GET / HTTP/1.1" 404 -
+INFO:werkzeug: * Running on http://0.0.0.0:3600/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:24:48] "GET / HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:24:51] "GET /home HTTP/1.1" 200 -
+INFO:werkzeug: * Running on http://0.0.0.0:3600/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:25:11] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:25:17] "GET /?name=Hallo HTTP/1.1" 200 -
+INFO:werkzeug: * Running on http://0.0.0.0:3600/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:25:53] "GET /?user=Hallo HTTP/1.1" 200 -
+INFO:werkzeug: * Running on http://0.0.0.0:3600/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:26:19] "GET /?user=Hallo HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:26:34] "GET /?user=Node&cookie=2876665379 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 08:45:32] "GET /?user=Node&cookie=2876665379 HTTP/1.1" 200 -
+INFO:werkzeug: * Running on http://0.0.0.0:3600/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 09:01:24] "POST /api/login HTTP/1.1" 308 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 09:02:13] "POST /api/login HTTP/1.1" 308 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 09:02:13] "POST /api/login/ HTTP/1.0" 400 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 09:03:07] "POST /api/login HTTP/1.1" 308 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 09:03:07] "POST /api/login/ HTTP/1.0" 400 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 09:03:16] "POST /api/login HTTP/1.1" 308 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 09:03:16] "POST /api/login/ HTTP/1.0" 400 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 09:03:28] "POST /api/login HTTP/1.1" 308 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 09:03:28] "POST /api/login/ HTTP/1.0" 400 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 09:06:16] "POST /api/login HTTP/1.1" 308 -
+ERROR:api:Exception on /api/login/ [POST]
+Traceback (most recent call last):
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask_restful\__init__.py", line 462, in wrapper
+    return self.make_response(data, code, headers=headers)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask_restful\__init__.py", line 491, in make_response
+    resp = self.representations[mediatype](data, *args, **kwargs)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask_restful\representations\json.py", line 21, in output_json
+    dumped = dumps(data, **settings) + "\n"
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\json\__init__.py", line 231, in dumps
+    return _default_encoder.encode(obj)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\json\encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type UUID is not JSON serializable
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 09:06:16] "POST /api/login/ HTTP/1.1" 500 -
+INFO:werkzeug: * Running on http://0.0.0.0:3600/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 09:07:30] "POST /api/login HTTP/1.1" 308 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 09:07:30] "POST /api/login/ HTTP/1.1" 200 -
+ERROR:api:Exception on / [POST]
+Traceback (most recent call last):
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask_restful\__init__.py", line 458, in wrapper
+    resp = resource(*args, **kwargs)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\views.py", line 89, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask_restful\__init__.py", line 573, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "api.py", line 218, in post
+    data = str((request.form["data"]),encoding='utf-8')
+TypeError: decoding str is not supported
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 09:08:41] "POST / HTTP/1.1" 500 -
+INFO:werkzeug: * Running on http://0.0.0.0:3600/ (Press CTRL+C to quit)
+ERROR:api:Exception on / [POST]
+Traceback (most recent call last):
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask_restful\__init__.py", line 458, in wrapper
+    resp = resource(*args, **kwargs)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\views.py", line 89, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask_restful\__init__.py", line 573, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "api.py", line 218, in post
+    data = str(str(request.form["data"]),encoding='utf-8')
+TypeError: decoding str is not supported
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 09:09:42] "POST / HTTP/1.1" 500 -
+INFO:werkzeug: * Running on http://0.0.0.0:3600/ (Press CTRL+C to quit)
+ERROR:api:Exception on / [POST]
+Traceback (most recent call last):
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask_restful\__init__.py", line 458, in wrapper
+    resp = resource(*args, **kwargs)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\views.py", line 89, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask_restful\__init__.py", line 573, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "api.py", line 219, in post
+    data = json.loads(data)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\json\__init__.py", line 357, in loads
+    return _default_decoder.decode(s)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\json\decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 09:10:21] "POST / HTTP/1.1" 500 -
+INFO:werkzeug: * Running on http://0.0.0.0:3600/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 09:11:36] "POST / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 09:14:02] "POST / HTTP/1.1" 200 -

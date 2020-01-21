@@ -4,7 +4,7 @@ import os
 import uuid
 from datetime import datetime
 from importlib import reload as BEANS
-
+import json
 
 # install modules if missing!
 install = []
@@ -148,95 +148,125 @@ CORS(app)
 # query
 query = Query()
 
+###################################################################################
+###################################################################################
+###################################################################################
+
+
+def checkData(data:dict):
+    if data['voltage'] != "" and data['batt'] != "" and data['x'] != "" and data['y'] != "":
+        return True
+    else:
+        return False
+
+def confReload(): # i cant reload critical things like HOST and PORT because the server is already running!
+    global rootCookie
+    global wUserToken
+    global wUser
+    global rootUser
+    global rootPw
+    from lib.config import cfg
+
+    # user with edit rights
+    rootUser = cfg['root']['name']
+    rootPw = cfg['root']['pw']
+    rootCookie = str(uuid.uuid4())
+
+    #users
+    USERS = cfg["users"]
+
+    # watch only user
+    wUser = cfg['wUser']['wUser']
+    wUserToken = cfg['wUser']['wUserToken']
+
+
+def logRequest(usr:str,data,valid:bool):
+    now = datetime.now()
+    timestamp = now.strftime("%Y-%m-%d_%H:%M:%S")
+    reqID = str(uuid.uuid4())
+
+    Data = {}
+
+    if str(data) == "":
+        data = "NODATA"
+
+    Data["fromUser"] = str(usr)
+    Data["data"] = str(data)
+    Data["requestID"] = str(reqID)
+    Data["timestamp"] = str(timestamp)
+    Data["valid"] = bool(valid)
+    reqdb.insert(Data)
+
+
+
+
+###################################################################################
+###################################################################################
+###################################################################################
+
+
+
+
+
+
+
 class base(Resource):
     def post(self):
 
         usr = (request.form["user"])
-        print("<<< " + str(usr))
-
-        passwd = (request.form["pw"])
-        print("<<< " + str(usr))
-
-
+        cookie = (request.form["cookie"])
         data = (request.form["data"])
-        print(data)
-        
-
-        
-
-        #Post Denied
-        if str(usr) != rootUser:
-
-            for each in USERS:
-                name = each.split(":")[0]
-                pw = each.split(":")[1]
-                print(name)
-                print(pw)
-                if str(usr) == str(name) and passwd == str(pw):
-                    accepted = True
-                    break
-
-            if accepted == True:
-                print(">>> 200")
-                ret = '{"RESPONSE": 200}'
-
-                resp = Response(response=ret,
-                            status=200,
-                            mimetype="application/json") 
-                return resp
-
-            else:    
-                print(">>> 403")
-                ret = '{"RESPONSE": 403}'
-
-                resp = Response(response=ret,
-                            status=403,
-                            mimetype="application/json") 
-                return resp
-
-        #Post Accepted
-        if str(usr) == rootUser and request.form['pw'] == rootPw and data != "":
-            print(">>> 200")
+        try:
+            data = json.loads(data)
+        except Exception as err:
+            error("in Request: "+str(err))
+            return {"error":True}
             
-            now = datetime.now()
-            timestamp = now.strftime("%Y-%m-%d-%H-%M-%S")
-            reqID = uuid.uuid4()
+        # only root is permitted to post!
+        if str(usr) == rootUser and str(cookie) == rootCookie:
+            # curdb
+            #| ID | time | CSpannung | BatterieLadung? | X | Y |
 
-            Data = {}
+            if checkData(data):
+                logRequest(usr,data,True) #Log Request
+                
+                update = {}
+                update['ID'] = str(uuid.uuid4())
+                update['time'] = datetime.now.strftime("%Y-%m-%d_%H:%M:%S")
+                update['voltage'] = data['voltage']
+                update['batt'] = data['batt'] # Batterie state.
+                update['x'] = data['x']
+                update['y'] = data['y']
 
-            if str(data) == "":
-                data = "NODATA"
+                curdb.insert(update)
 
-            Data["fromUser"] = str(usr)
-            Data["data"] = str(data)
-            Data["requestID"] = str(reqID)
-            Data["timestamp"] = str(timestamp)
+            else:
+                logRequest(usr,data,False)
+            
+            
 
-            reqdb.insert(Data)
+            return {"error":False}
+            
+        else:
+            return {"error":True}
 
-            ret = '{"RESPONSE": 200}'
 
-            resp = Response(response=ret,
-                        status=200,
-                        mimetype="application/json") 
-            return resp
-    #Deny GET requests
-    def get(self):
-        ret = '{"RESPONSE": 403}'
+       
 
-        resp = Response(response=ret,
-                    status=403,
-                    mimetype="application/json")
-
-        return resp
+    def get(self):      #http://127.0.0.1:3600/?user=Node&cookie=2876665379
+        if str(request.args['user']) == wUser and str(request.args['cookie']) in wUserToken:
+            return {"error":False}
+        else:
+            return {"error":True}
 
 
 class connect(Resource):
+    confReload() # Reload to make sure everything is up to date!
     global rootCookie
 
     def post(self):
         if request.form['user'] == rootUser and request.form['pass'] == rootPw:
-            rootCookie = uuid.uuid4()
+            rootCookie = str(uuid.uuid4())
             
             return {'error':False,'cookie':rootCookie}
         
@@ -245,6 +275,24 @@ class connect(Resource):
 
         else:
             return {'error':True} 
+
+# just to check the cookie / auth is still valid!
+class check(Resource):
+    global rootCookie
+    global wUserToken
+    global wUser
+    global rootUser
+    def post(self):
+        if request.form['user'] == rootUser and request.form['cookie'] == rootCookie:
+            done_task("Valid Root user!")
+            return {"error":False}
+        elif request.form['user'] == wUser and request.form['cookie'] in wUserToken:
+            return {"error":False}
+        else:
+            return {"error":True}
+
+
+
 
 
 if __name__ == '__main__':

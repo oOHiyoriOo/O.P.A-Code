@@ -134,53 +134,42 @@ class base(Resource):
     def post(self):
 
         usr = (request.form["user"])
-        print("<<< " + str(usr))
+        cookie = (request.form["cookie"])
         data = (request.form["data"])
-        print(data)
-        #Post Denied
-        if str(usr) != "PI":
-            print(">>> 403")
-            ret = '{"RESPONSE": 403}'
 
-            resp = Response(response=ret,
-                        status=403,
-                        mimetype="application/json") 
-            return resp
-        #Post Accepted
-        if str(usr) == "PI":
-            print(">>> 200")
-            
-            now = datetime.now()
-            timestamp = now.strftime("%Y-%m-%d-%H-%M-%S")
-            reqID = uuid.uuid4()
+        # only root is permitted to post!
+        if str(usr) == rootUser and str(cookie) == rootCookie:
+            return {"error":False}
+        else:
+            return {"error":True}
 
-            Data = {}
 
-            if str(data) == "":
-                data = "NODATA"
+            # now = datetime.now()
+            # timestamp = now.strftime("%Y-%m-%d-%H-%M-%S")
+            # reqID = uuid.uuid4()
 
-            Data["fromUser"] = str(usr)
-            Data["data"] = str(data)
-            Data["requestID"] = str(reqID)
-            Data["timestamp"] = str(timestamp)
+            # Data = {}
 
-            reqdb.insert(Data)
+            # if str(data) == "":
+            #     data = "NODATA"
 
-            ret = '{"RESPONSE": 200}'
+            # Data["fromUser"] = str(usr)
+            # Data["data"] = str(data)
+            # Data["requestID"] = str(reqID)
+            # Data["timestamp"] = str(timestamp)
 
-            resp = Response(response=ret,
-                        status=200,
-                        mimetype="application/json") 
-            return resp
+            # reqdb.insert(Data)
+
     #Deny GET requests
     def get(self):
-        ret = '{"RESPONSE": 403}'
-
-        resp = Response(response=ret,
-                    status=403,
-                    mimetype="application/json")
-
-        return resp
+        info( str(request.args) )
+        # if str(usr) == rootUser and str(cookie) == rootCookie:
+        #     return {"error":False}
+            
+        # elif str(usr) == wUser and str(cookie) in wUserToken:
+        #     return {"error":False}
+        # else:
+        #     return {"error":True}
 
 
 class connect(Resource):
@@ -210,14 +199,16 @@ class DB_SERVER(threading.Thread):
         self.DEBUG = DEBUG
 
     def run(self):
-        app.run(host=HOST,port=PORT,debug=False)
+        app.run(host=self.HOST,port=self.PORT,debug=self.DEBUG)
         print ("Exiting " + self.name)
     
-    def stop():
+    def stop(self):
         pass
 
-def msg(msg:str,ThreadID:int):
-    info( str("["+ThreadID+"] => "+msg)) 
+
+
+def ThreadMsg(msg:str,name:str):
+    info( str("["+name+"] => "+msg)) 
 
 
 if __name__ == '__main__':
@@ -235,7 +226,7 @@ if __name__ == '__main__':
     while True:
         input("$ ")
 
-    api.add_resource(base,'/') # send raw request data to database
+    api.add_resource(base,'/home') # send raw request data to database
     api.add_resource(connect,'/api/login/') # login form
 
    
