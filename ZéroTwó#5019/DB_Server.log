@@ -146,3 +146,112 @@ INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 09:10:21] "POST / HTTP/1.1" 500 -
 INFO:werkzeug: * Running on http://0.0.0.0:3600/ (Press CTRL+C to quit)
 INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 09:11:36] "POST / HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [21/Jan/2020 09:14:02] "POST / HTTP/1.1" 200 -
+INFO:werkzeug: * Running on http://0.0.0.0:3600/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:40:53] "GET /query HTTP/1.1" 308 -
+ERROR:api:Exception on /query/ [GET]
+Traceback (most recent call last):
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask_restful\__init__.py", line 458, in wrapper
+    resp = resource(*args, **kwargs)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\views.py", line 89, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask_restful\__init__.py", line 573, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "api.py", line 296, in get
+    info(request.query)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\werkzeug\local.py", line 348, in __getattr__
+    return getattr(self._get_current_object(), name)
+AttributeError: 'Request' object has no attribute 'query'
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:40:53] "GET /query/ HTTP/1.1" 500 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:40:54] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:werkzeug: * Running on http://0.0.0.0:3600/ (Press CTRL+C to quit)
+ERROR:api:Exception on /query/ [GET]
+Traceback (most recent call last):
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask_restful\__init__.py", line 458, in wrapper
+    resp = resource(*args, **kwargs)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\views.py", line 89, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask_restful\__init__.py", line 573, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "api.py", line 296, in get
+    info(request.query)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\werkzeug\local.py", line 348, in __getattr__
+    return getattr(self._get_current_object(), name)
+AttributeError: 'Request' object has no attribute 'query'
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:41:31] "GET /query/ HTTP/1.1" 500 -
+ERROR:api:Exception on /query/ [GET]
+Traceback (most recent call last):
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask_restful\__init__.py", line 458, in wrapper
+    resp = resource(*args, **kwargs)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask\views.py", line 89, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\flask_restful\__init__.py", line 573, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "api.py", line 296, in get
+    info(request.query)
+  File "C:\Users\fricke.sid.BBS-DUD\AppData\Local\Programs\Python\Python38\lib\site-packages\werkzeug\local.py", line 348, in __getattr__
+    return getattr(self._get_current_object(), name)
+AttributeError: 'Request' object has no attribute 'query'
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:41:37] "GET /query/?q=q HTTP/1.1" 500 -
+INFO:werkzeug: * Running on http://0.0.0.0:3600/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:43:04] "GET /query/?q=q HTTP/1.1" 200 -
+INFO:werkzeug: * Running on http://0.0.0.0:3600/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:43:25] "GET /query/?q=q HTTP/1.1" 200 -
+INFO:werkzeug: * Running on http://0.0.0.0:3600/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:43:49] "GET /query/?q=q HTTP/1.1" 200 -
+INFO:werkzeug: * Running on http://0.0.0.0:3600/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:44:47] "GET /query/?q=q HTTP/1.1" 200 -
+INFO:werkzeug: * Running on http://0.0.0.0:3600/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:45:26] "GET /query/?q=q HTTP/1.1" 200 -
+INFO:werkzeug: * Running on http://0.0.0.0:3600/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:45:40] "GET /query/?q=q HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:45:44] "GET /query/?user=q HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:07] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:11] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:13] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:13] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:13] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:13] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:13] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:13] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:14] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:14] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:15] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:15] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:15] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:15] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:15] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:15] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:15] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:16] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:16] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:16] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:16] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:16] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:16] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:16] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:16] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:17] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:17] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:17] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:17] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:17] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:17] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:17] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:46:17] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug: * Running on http://0.0.0.0:3600/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:48:36] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug: * Running on http://0.0.0.0:3600/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:50:01] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:50:31] "GET /query/?user=Node&cookie=2876665379 HTTP/1.1" 200 -

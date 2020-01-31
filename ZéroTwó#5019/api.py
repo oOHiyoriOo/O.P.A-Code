@@ -291,8 +291,19 @@ class check(Resource):
         else:
             return {"error":True}
 
+class QueryDB(Resource):
+    def get(self):
+        try:
+            info(request.args['user']+" : "+request.args['cookie'])
 
-
+            if request.args['user'] == rootUser and request.args['cookie'] == rootCookie:
+                return curdb.all()
+            elif request.args['user'] == wUser and request.args['cookie'] in wUserToken:
+                return curdb.all()
+            else:
+                return [{'error':True}]
+        except:
+            return [{'error':True}]
 
 
 if __name__ == '__main__':
@@ -310,5 +321,6 @@ if __name__ == '__main__':
 
     api.add_resource(base,'/') # send raw request data to database
     api.add_resource(connect,'/api/login/') # login form
+    api.add_resource(QueryDB,'/query/')
 
     app.run(host=HOST,port=PORT,debug=False)
