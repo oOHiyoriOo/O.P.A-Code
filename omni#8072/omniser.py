@@ -29,8 +29,8 @@ ser = serial.Serial("COM5", 9600)
 
 print("connected.\n")
 
-def send(data):
-    OUT = IN.replace("> ", "")
+def send(data:str):
+    OUT = data.replace("> ", "")
 
     if OUT == "r45":
         OUT = "r150"
@@ -44,8 +44,10 @@ def send(data):
     elif OUT == "terminate":
         print("terminating. . .")
         curpos = int(sdb.search(query.id == 0)[0]['pos'])
+        
         if curpos < 0:
-            OUT = "r" + str(curpos)
+            OUT = "r" +  str(curpos).replace("-", "")
+            print(OUT)
         elif curpos > 0:
             OUT = "l" + str(curpos)
 
