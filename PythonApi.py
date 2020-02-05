@@ -6,6 +6,8 @@ from datetime import datetime
 from importlib import reload as BEANS
 import json
 
+import threading # sup routins
+
 # install modules if missing!
 install = []
 try: from tinydb import TinyDB, Query
@@ -293,6 +295,9 @@ class check(Resource):
 
 class QueryDB(Resource):
     def get(self):
+
+        movingThread.stop = True
+
         try:
             info(request.args['user']+" : "+request.args['cookie'])
 
@@ -304,6 +309,73 @@ class QueryDB(Resource):
                 return [{'error':True}]
         except:
             return [{'error':True}]
+
+
+
+
+
+
+
+
+
+# willkommen in der threading hölle.
+# Bitte nehmen sie sich einen keks UND kaffee
+# wenn eines fehlt sterben wir also stell keine fragen und tu es einfach.
+
+
+
+################################################################################################################
+################################################################################################################
+################################################################################################################
+
+class DB_MOVER(threading.Thread):
+    def __init__(self): # Pre define stuff like name etc...
+        threading.Thread.__init__(self)
+        self.stop = False
+        self.name = "DB_Mover"
+
+    def run(self):
+        while not self.stop:
+            info( datetime.now().strftime('%H:%M:%S')+"\r" )
+            time.sleep(1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 if __name__ == '__main__':
@@ -322,5 +394,8 @@ if __name__ == '__main__':
     api.add_resource(base,'/') # send raw request data to database
     api.add_resource(connect,'/api/login/') # login form
     api.add_resource(QueryDB,'/query/')
+
+    movingThread = DB_MOVER()
+    movingThread.start()
 
     app.run(host=HOST,port=PORT,debug=False)

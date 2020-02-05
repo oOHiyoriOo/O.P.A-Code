@@ -6,11 +6,24 @@ cfg = {
     
     "root":{
         "name":"root",
-        "pw":"0000"
-    },
+        "pw":"0000",
 
+    "users":[
+        "John Doe:Password"
+    ],
+        
+    },
+    "wUser":{
+        "wUser":"Node", # watch only user.
+        "wUserToken":[ # to limit read only acces we use tokens to grant access
+            "2876665379"
+        ],
+    },
+    "users":[
+        "override:ov123"
+    ],
     "dir":{
-        "DbRootDir":"./db"  # please provide full path ("./" is current directory)
+        "DbRootDir":"./db"  # pls provide full path ("./" is current directiony)
     }    
 
 }
