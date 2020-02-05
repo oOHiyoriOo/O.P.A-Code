@@ -4,6 +4,8 @@ from tinydb import TinyDB, Query
 
 
 
+query = Query()
+
 if not os.path.isdir("db"):
     os.system("mkdir db")
 
@@ -38,13 +40,40 @@ def send(data):
         OUT = "l150"
     elif OUT == "l90":
         OUT = "l240"
-    else: 
-        OUT == "blink:3"
+
+    elif OUT == "terminate":
+        print("terminating. . .")
+        curpos = int(sdb.search(query.id == 0)[0]['pos'])
+        if curpos < 0:
+            OUT = "r" + str(curpos)
+        elif curpos > 0:
+            OUT = "l" + str(curpos)
+
+        data = OUT.encode()
+        ser.write(data)
+        print("Terminated.")
+        sys.exit()
+
+        
+
+    curpos = int(sdb.search(query.id == 0)[0]['pos'])
+
+    if "l" in OUT:
+        outdata = OUT.replace("l", "")
+        newpos = int(curpos) - int(outdata)
+
+    elif "r" in OUT:
+        outdata = OUT.replace("r", "")
+        newpos = int(curpos) + int(outdata)
+
 
     data = OUT.encode()
     print("sending " + str(OUT))
 
-    curpos = int(sdb.search(query.id == 1)[0]['pos'])
+   
+    #print(curpos)
+    
+    sdb.update({"pos":int(newpos)}, query.id == 0)
     #TODO: update database accordingly
 
     ser.write(data)
