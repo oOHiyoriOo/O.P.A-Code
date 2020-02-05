@@ -8,3 +8,5 @@ INFO:werkzeug:127.0.0.1 - - [05/Feb/2020 09:04:47] "GET /query/ HTTP/1.1" 200 -
 INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
 INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
 INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
+INFO:werkzeug: * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [05/Feb/2020 09:16:27] "GET /query/ HTTP/1.1" 200 -

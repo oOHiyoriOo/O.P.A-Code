@@ -336,8 +336,9 @@ class DB_MOVER(threading.Thread):
 
     def run(self):
         while not self.stop:
-            info( datetime.now().strftime('%H:%M:%S')+"\r" )
-            time.sleep(1)
+            time = datetime.now().strftime('%H:%M:%S')
+            if str(time) == "00:00:00":
+                entrys = curdb.all()
 
 
 
