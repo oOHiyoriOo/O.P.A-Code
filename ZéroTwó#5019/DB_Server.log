@@ -255,3 +255,5 @@ INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:48:36] "GET /query/?user=fjhsdkjhf H
 INFO:werkzeug: * Running on http://0.0.0.0:3600/ (Press CTRL+C to quit)
 INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:50:01] "GET /query/?user=fjhsdkjhf HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [31/Jan/2020 10:50:31] "GET /query/?user=Node&cookie=2876665379 HTTP/1.1" 200 -
+INFO:werkzeug: * Running on http://0.0.0.0:3600/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [17/Feb/2020 21:05:18] "GET / HTTP/1.1" 400 -
