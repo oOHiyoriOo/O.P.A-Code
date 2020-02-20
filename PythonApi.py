@@ -339,8 +339,7 @@ class DB_MOVER(threading.Thread):
             time = datetime.now().strftime('%H:%M:%S')
             if str(time) == "00:00:00":
                 entrys = curdb.all()
-
-
+                info("Moving: "+str(entrys))
 
 
 
