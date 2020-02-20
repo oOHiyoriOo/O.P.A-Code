@@ -3,7 +3,7 @@ import serial
 from tinydb import TinyDB, Query
 import random
 
-open("db/measurements.json", "w").close() 
+open("db/measurements.json", "w").close()
 mdb = TinyDB("db/measurements.json")
 
 query = Query()
@@ -24,13 +24,13 @@ DIR = mdb.search(query.id == 1)[0]["dir"]
 #print(INPUT)
 #print(DIR)
 MAX = max(INPUT)
-IND = INPUT.index(max(INPUT))  
+IND = INPUT.index(max(INPUT))
 DIRECTION = DIR[IND]
 #print(DIRECTION)
 
 if DIRECTION == "L":
     print("Sending Left . . .")
-    #TODO Send to db, rotate towards direction 
+    #TODO Send to db, rotate towards direction
 
 elif DIRECTION == "R":
     print("Sending Right . . .")

@@ -24,8 +24,8 @@ def clear():
         _ = os.system('cls') 
     else: 
         _ = os.system('clear') 
-
-ser = serial.Serial("COM5", 9600)
+#For windows: "/COMX"  RPI: "/dev/ttyACM0"
+ser = serial.Serial("/dev/ttyACM0", 9600)
 
 print("connected.\n")
 
@@ -44,7 +44,7 @@ def send(data:str):
     elif OUT == "terminate":
         print("terminating. . .")
         curpos = int(sdb.search(query.id == 0)[0]['pos'])
-        
+
         if curpos < 0:
             OUT = "r" +  str(curpos).replace("-", "")
             print(OUT)
@@ -55,8 +55,6 @@ def send(data:str):
         ser.write(data)
         print("Terminated.")
         sys.exit()
-
-        
 
     curpos = int(sdb.search(query.id == 0)[0]['pos'])
 
@@ -72,9 +70,9 @@ def send(data:str):
     data = OUT.encode()
     print("sending " + str(OUT))
 
-   
+
     #print(curpos)
-    
+
     sdb.update({"pos":int(newpos)}, query.id == 0)
     #TODO: update database accordingly
 
@@ -86,5 +84,4 @@ while True:
 
     IN = input("> ")
     send(IN)
-    
 
