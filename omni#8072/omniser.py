@@ -9,7 +9,7 @@ if not os.path.isdir("db"):
     os.system("mkdir db")
 
 try:
-    open("db/curservos.json", "w").close() #TODO: this is nonsense, make better workaround, not now tho
+    open("db/curservos.json", "w").close()
     sdb = TinyDB("db/curservos.json")
 except:
     print("restart script as sudo.")
