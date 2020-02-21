@@ -40,20 +40,30 @@ void loop() {
           delay(1000);
           i++;
         }
-        //TODO:: SIMPLIFY
-    }else if(str.startsWith("r")){ 
-        str.replace("r","");
-        int e = str.toInt();
+    }else if(str.startsWith("test")){ 
         myservo.write(0);
-        delay(e);
+        delay(1000);
+        myservo.write(45);
+        delay(1000);
         myservo.write(90);
-
-    }else if(str.startsWith("l")){
-        str.replace("l","");
-        int e = str.toInt();
+        delay(1000);
+        myservo.write(135);
+        delay(1000);
         myservo.write(180);
-        delay(e);
-        myservo.write(90);
+        delay(1000);
+        myservo.write(0);
+
+    }else if(str.startsWith("get")){ 
+
+        str = myservo.read();
+        Serial.print("at "+str+"°\n");
+
+    
+
+    }else if(str.startsWith("set")){
+        str.replace("set","");
+        int e = str.toInt();
+        myservo.write(e);
     
       }
     
