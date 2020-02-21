@@ -1,5 +1,6 @@
 #include <Servo.h>
-Servo myservo;
+Servo bot;
+//Servo top;
 
 int pos = 0;
 
@@ -19,8 +20,11 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
 
   // 
-  myservo.attach(9);
+  bot.attach(9);
+  //top.attach(3);                                                    servo top stage
   Serial.begin(9600);
+  bot.write(0);
+  //top.write(0);
 }
 
 
@@ -31,42 +35,47 @@ void loop() {
     String str = Serial.readString();
     
     if(str){
-      if(str.startsWith("ping")){
-        int i = 0;
-        while (i < 3){
-          digitalWrite(LED_BUILTIN, HIGH);
-          delay(1000);
-          digitalWrite(LED_BUILTIN, LOW);
-          delay(1000);
-          i++;
-        }
-    }else if(str.startsWith("test")){ 
-        myservo.write(0);
-        delay(1000);
-        myservo.write(45);
-        delay(1000);
-        myservo.write(90);
-        delay(1000);
-        myservo.write(135);
-        delay(1000);
-        myservo.write(180);
-        delay(1000);
-        myservo.write(0);
 
-    }else if(str.startsWith("get")){ 
+    if(str.startsWith("0.")){
+      //BOT SERVO
+      str.replace("0.","");
 
-        str = myservo.read();
+      if(str.startsWith("test")){ 
+        bot.write(0);
+        delay(1000);
+        bot.write(45);
+        delay(1000);
+        bot.write(90);
+        delay(1000);
+        bot.write(135);
+        delay(1000);
+        bot.write(180);
+        delay(1000);
+        bot.write(0);
+            
+      }else if(str.startsWith("get")){ 
+            
+        str = bot.read();
         Serial.print("at "+str+"°\n");
+              
+      }else if(str.startsWith("set")){
+          str.replace("set","");
+          int e = str.toInt();
+          bot.write(e);
+      
+        }
 
-    
+    }else if(str.startsWith("1.")){
+      //TOP SERVO
 
-    }else if(str.startsWith("set")){
-        str.replace("set","");
-        int e = str.toInt();
-        myservo.write(e);
+      
+      str.replace("1.","");
+      
+      
+    }
+                
     
+    }
       }
-    
-      }}
 
 }
