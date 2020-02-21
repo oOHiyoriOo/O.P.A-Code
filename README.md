@@ -1,6 +1,7 @@
 # O.P.A Code
-
-> O.P.A is a project group for BBS-Duderstadt wich is building a self orienting solar panel.
+```md
+O.P.A is a project group for BBS-Duderstadt wich is building a self-orientating solar panel
+```
 
 ## Build Status
 
@@ -16,18 +17,21 @@
 ### **Arduino**
 | Feature            | Status           |
 |:-------------      | :-------------:  |
-| Servo controll     | ✓                |
+| servo control      | ✓                |
 | status query       | **X**            |
 
 # Planned Features!
-> AI Predict sun direction.
-> Data DB with stats
-> Online iterface for exploring stats (elasticsearch)
+```md
+> simple AI to predict current sun location
+> current statistics with stats
+> online interface for exploring stats (elasticsearch) //this is beyond horrible
 > more coming soon.
+```
 
 ### Used Packages
 
-We use a number of packages to work properly:
+external packages used:
 
-* [Flask] - [PyPI Flask](https://pypi.org/project/Flask/)
-* [Flask Restful] - [Flask Restful PyPI](https://pypi.org/project/Flask-RESTful/)
+* [Flask] - [Flask on PyPI](https://pypi.org/project/Flask/)
+* [Flask Restful] - [Flask Restful on PyPI](https://pypi.org/project/Flask-RESTful/)
+* [TinyDB] - [TinyDB on PyPI]https://pypi.org/project/tinydb/
