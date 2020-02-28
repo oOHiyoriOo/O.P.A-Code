@@ -34,4 +34,4 @@ external packages used:
 
 * [Flask] - [Flask on PyPI](https://pypi.org/project/Flask/)
 * [Flask Restful] - [Flask Restful on PyPI](https://pypi.org/project/Flask-RESTful/)
-* [TinyDB] - [TinyDB on PyPI]https://pypi.org/project/tinydb/
+* [TinyDB] - [TinyDB on PyPI](https://pypi.org/project/tinydb/)
