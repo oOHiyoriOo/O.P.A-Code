@@ -1,7 +1,7 @@
 import serial
 import os, sys
 from tinydb import TinyDB, Query
-
+import threading
 
 query = Query()
 
@@ -25,6 +25,11 @@ else:
 #For windows: "/COMX"  RPI: "/dev/ttyACM0"
 
 
+
+def update():
+    data = "000".encode()
+    serial.write(data)
+
 def clear(): 
     if os.name == 'nt': 
         _ = os.system('cls') 
@@ -33,6 +38,8 @@ def clear():
 
 
 ser = serial.Serial(PORT, 9600)
+
+
 
 
 #reset position and db on start
@@ -53,6 +60,8 @@ sdb.insert(data)
 
 
 print("Ready.\n")
+
+t1 = threading.Thread(target=update)
 
 def send(data:str):
     OUT = data.replace("> ", "")

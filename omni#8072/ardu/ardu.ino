@@ -1,38 +1,56 @@
+#include <VariableTimedAction.h>
+
 #include <Servo.h>
+
 Servo bot;
 //Servo top;
 
 int pos = 0;
 
+int x1 = A0;
+int x2 = A2;
+
+int defx1 = analogRead(x1);
+int defx2 = analogRead(x2);
+
 
 void setup() {
 
-//   pinMode(0, OUTPUT);
-//   pinMode(1, OUTPUT);
-//   pinMode(2, OUTPUT);
-  
-//   pinMode(3, OUTPUT);
-//   pinMode(4, OUTPUT);
-//   pinMode(5, OUTPUT);
-  
-//   pinMode(6, OUTPUT);
 
   pinMode(LED_BUILTIN, OUTPUT);
+
+ 
+
 
   // 
   bot.attach(9);
   //top.attach(3);                                                    servo top stage
   Serial.begin(9600);
-  bot.write(0);
+  //bot.write(0);
   //top.write(0);
 }
 
 
 
 void loop() {
-
   while(Serial.available() > 0 ){
     String str = Serial.readString();
+
+
+
+    int x1diff = analogRead(x1) - defx1;
+    int x2diff = analogRead(x2) - defx2;
+
+
+    if ((x1diff > 10) || (x2diff > 10)){
+    if((x1diff > x2diff) && (pos < 180)){
+        pos = pos + 20;
+        bot.write(pos);
+    }else if((x2diff > x1diff) && (pos > 0)){
+        pos = pos - 20; 
+        bot.write(pos);
+    }
+    }
     
     if(str){
 
@@ -57,6 +75,12 @@ void loop() {
             
         str = bot.read();
         Serial.print("at "+str+"°\n");
+        Serial.print("1 at light level ");
+        Serial.print(analogRead(x1));
+        Serial.print(". \n");
+        Serial.print("2 at light level ");
+        Serial.print(analogRead(x2));
+        Serial.print(". \n");
               
       }else if(str.startsWith("set")){
           str.replace("set","");
