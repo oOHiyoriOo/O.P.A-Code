@@ -16,8 +16,6 @@ int defx2 = analogRead(x2);
 static struct pt pt1, pt2;
 
 
-
-
 //Protothread: Get values
 static int ptping(struct pt *pt){
   static unsigned long lastRead = 0;
@@ -31,7 +29,6 @@ static int ptping(struct pt *pt){
     Serial.print("bot:"+str+"\n");
     //Serial.print("bot:"+str+"\n");
 
-
   }
   PT_END(pt);
 }
@@ -39,33 +36,37 @@ static int ptping(struct pt *pt){
 //Protothread: Set random (DEBUG)
 static int randpos(struct pt *pt){
   static unsigned long lastSet = 0;
-  static int pos
+  
+  static int x1diff, x2diff;
   PT_BEGIN(pt);
   while(1) {
+
     lastSet = millis();
-    PT_WAIT_UNTIL(pt, millis() - lastSet > 3000);
+    PT_WAIT_UNTIL(pt, millis() - lastSet > 5000);
+    
+    x1diff = analogRead(x1) - defx1;
+    x2diff = analogRead(x2) - defx2;
 
-    Serial.print("bot:"+str+"\n");
-    //Serial.print("bot:"+str+"\n");
 
-
+    if ((x1diff > 10) || (x2diff > 10)){
+      if((x1diff > x2diff) && (pos < 180)){
+          pos = pos + 20;
+          bot.write(pos);
+          Serial.print("Updated. \n");
+    }else if((x2diff > x1diff) && (pos > 0)){
+          pos = pos - 20; 
+          bot.write(pos);
+          Serial.print("Updated. \n");
+    }
+    }
+   
   }
   PT_END(pt);
 }
 
-
-
-
-
-
-
 void setup() {
 
-
   pinMode(LED_BUILTIN, OUTPUT);
-
- 
-
 
   // 
   bot.attach(9);
@@ -78,27 +79,9 @@ void setup() {
   PT_INIT(&pt2);
 }
 
-
-
 void loop() {
   while(Serial.available() > 0 ){
     String str = Serial.readString();
-
-
-
-    int x1diff = analogRead(x1) - defx1;
-    int x2diff = analogRead(x2) - defx2;
-
-
-    if ((x1diff > 10) || (x2diff > 10)){
-    if((x1diff > x2diff) && (pos < 180)){
-        pos = pos + 20;
-        bot.write(pos);
-    }else if((x2diff > x1diff) && (pos > 0)){
-        pos = pos - 20; 
-        bot.write(pos);
-    }
-    }
     
     if(str){
 
@@ -139,14 +122,12 @@ void loop() {
 
     }else if(str.startsWith("1.")){
       //TOP SERVO
-
-      
+ 
       str.replace("1.","");
       
       
     }
                 
-    
     }
       }
     ptping(&pt1);
