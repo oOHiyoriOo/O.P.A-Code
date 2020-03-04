@@ -1,5 +1,5 @@
-#include <VariableTimedAction.h>
 
+#include <pt.h>
 #include <Servo.h>
 
 Servo bot;
@@ -12,6 +12,51 @@ int x2 = A2;
 
 int defx1 = analogRead(x1);
 int defx2 = analogRead(x2);
+
+static struct pt pt1, pt2;
+
+
+
+
+//Protothread: Get values
+static int ptping(struct pt *pt){
+  static unsigned long lastRead = 0;
+  static String str, str2;
+  PT_BEGIN(pt);
+  while(1) {
+    lastRead = millis();
+    PT_WAIT_UNTIL(pt, millis() - lastRead > 1000);
+    str = bot.read();
+    //str2 = top.read
+    Serial.print("bot:"+str+"\n");
+    //Serial.print("bot:"+str+"\n");
+
+
+  }
+  PT_END(pt);
+}
+
+//Protothread: Set random (DEBUG)
+static int randpos(struct pt *pt){
+  static unsigned long lastSet = 0;
+  static int pos
+  PT_BEGIN(pt);
+  while(1) {
+    lastSet = millis();
+    PT_WAIT_UNTIL(pt, millis() - lastSet > 3000);
+
+    Serial.print("bot:"+str+"\n");
+    //Serial.print("bot:"+str+"\n");
+
+
+  }
+  PT_END(pt);
+}
+
+
+
+
+
 
 
 void setup() {
@@ -28,6 +73,9 @@ void setup() {
   Serial.begin(9600);
   //bot.write(0);
   //top.write(0);
+  bot.write(90);
+  PT_INIT(&pt1);
+  PT_INIT(&pt2);
 }
 
 
@@ -101,5 +149,7 @@ void loop() {
     
     }
       }
+    ptping(&pt1);
+    randpos(&pt2);
 
 }

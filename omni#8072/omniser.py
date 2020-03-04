@@ -18,7 +18,7 @@ except:
 
 PORT = ""
 if os.name == "nt":
-    PORT = "COM8"
+    PORT = "COM5"
 else:
     PORT = "/dev/ttyACM0"
 
