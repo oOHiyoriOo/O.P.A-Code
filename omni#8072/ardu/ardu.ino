@@ -3,7 +3,7 @@
 #include <Servo.h>
 
 Servo bot;
-//Servo top;
+Servo top;
 
 int pos = 0;
 
@@ -25,9 +25,9 @@ static int ptping(struct pt *pt){
     lastRead = millis();
     PT_WAIT_UNTIL(pt, millis() - lastRead > 1000);
     str = bot.read();
-    //str2 = top.read
+    str2 = top.read();
     Serial.print("bot:"+str+"\n");
-    //Serial.print("bot:"+str+"\n");
+    Serial.print("bot:"+str2+"\n");
 
   }
   PT_END(pt);
@@ -52,10 +52,12 @@ static int randpos(struct pt *pt){
       if((x1diff > x2diff) && (pos < 180)){
           pos = pos + 20;
           bot.write(pos);
+          top.write(pos);
           Serial.print("Updated. \n");
     }else if((x2diff > x1diff) && (pos > 0)){
           pos = pos - 20; 
           bot.write(pos);
+          top.write(pos);
           Serial.print("Updated. \n");
     }
     }
@@ -68,13 +70,13 @@ void setup() {
 
   pinMode(LED_BUILTIN, OUTPUT);
 
-  // 
   bot.attach(9);
-  //top.attach(3);                                                    servo top stage
+  top.attach(11);
   Serial.begin(9600);
   //bot.write(0);
   //top.write(0);
   bot.write(90);
+  top.write(90);
   PT_INIT(&pt1);
   PT_INIT(&pt2);
 }
@@ -122,9 +124,9 @@ void loop() {
 
     }else if(str.startsWith("1.")){
       //TOP SERVO
- 
-      str.replace("1.","");
       
+      str.replace("1.","");
+      Serial.print("got input");
       
     }
                 
